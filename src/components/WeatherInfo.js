@@ -21,7 +21,7 @@ const WeatherInfo = () => {
         <Typography
           sx={{
             fontSize: { xs: "70px", md: "95px" },
-            ml: { xs: "40px", md: "0" },
+            ml: { xs: "30px", md: "0" },
           }}
           fontWeight="bold"
           fontFamily={"Trebuchet MS"}
