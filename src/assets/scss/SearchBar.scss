@@ -1,0 +1,52 @@
+.input-container {
+  position: relative;
+}
+input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  color: #ccc;
+  overflow: hidden;
+  font-size: 15px;
+  border: none;
+  padding: 2px 5px;
+  background-color: transparent;
+  border-bottom:2px solid rgb(129, 129, 129);
+  transition: 0.2s;
+  text-transform: capitalize;
+  &:focus {
+    border-bottom: 2px solid rgba(rgb(85, 100, 185), 1);
+   outline: none;
+  }
+  &::placeholder{
+    color: #aaa;
+  }
+  &:focus + .input-changer::after ,
+  &:focus + .input-changer::before {
+    width: 0;
+  }
+  &:hover  {
+      top: -1px;
+    border-bottom: 3px solid rgba(rgb(85, 100, 185), 1);
+  }
+}
+.input-changer {
+  &::after , &::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    background: rgba(#888, 0.7);
+    height: 2px;
+    width: 50%;
+    top: 28px;
+    transition: 0.5s ;
+  }
+  &::after {
+    left: 0;
+  }
+  &::before {
+    right: 0;
+  }
+
+}
