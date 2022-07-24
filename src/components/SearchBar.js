@@ -1,18 +1,14 @@
 import Box from "@mui/material/Box";
 import "../assets/css/SearchBar.min.css";
-import React, { useRef, useEffect } from "react";
+import React from "react";
 
 const SearchBar = ({ inputSearchHandler, inputValue, fetchNewData }) => {
-  const inputRef = useRef();
   const inputKeyDownHandler = (e) => {
     if (e.keyCode === 13) {
       fetchNewData();
     }
   };
 
-  useEffect(() => {
-    inputRef.current.focus();
-  });
 
   return (
     <Box
@@ -22,7 +18,6 @@ const SearchBar = ({ inputSearchHandler, inputValue, fetchNewData }) => {
       }}
     >
       <input
-        ref={inputRef}
         type="text"
         value={inputValue}
         onKeyDown={(e) => inputKeyDownHandler(e)}
