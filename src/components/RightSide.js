@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import SearchIcon from "./SearchIcon";
 import SearchBar from "./SearchBar";
 import TopCities from "./TopCities";
@@ -11,14 +11,10 @@ import Loader from "./Loader";
 import NextHoursWeather from "./NextHoursWeather";
 
 const RightSide = () => {
-  const [inputValue, setInputValue] = useState("");
+  const searchInputRef = useRef();
   const weatherCtx = useContext(WeatherContext);
 
-  const inputSearchHandler = (value) => {
-    setInputValue(value);
-  };
-
-  const fetchNewData = async (cityName = inputValue) => {
+  const fetchNewData = async (cityName = searchInputRef.current.value) => {
     weatherCtx.changeStatus({ isLoading: true });
     const value = cityName;
     if (value.trim().length) {
@@ -73,9 +69,14 @@ const RightSide = () => {
           })
         )
         .catch(() => {
-          weatherCtx.changeStatus({ statusFetch: false, isLoading: false });
+          console.log(1);
+          weatherCtx.changeStatus({
+            isAlert: true,
+            statusFetch: false,
+            isLoading: false,
+          });
         });
-      setInputValue("");
+      searchInputRef.current.value = "";
     }
   };
 
@@ -92,11 +93,7 @@ const RightSide = () => {
         }}
       >
         <SearchIcon fetchNewData={fetchNewData} />
-        <SearchBar
-          inputValue={inputValue}
-          fetchNewData={fetchNewData}
-          inputSearchHandler={inputSearchHandler}
-        />
+        <SearchBar ref={searchInputRef} fetchNewData={fetchNewData} />
         <TopCities fetchNewData={fetchNewData} />
         <WeatherDetails />
         <NextHoursWeather />
