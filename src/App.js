@@ -84,7 +84,6 @@ const App = () => {
       ) : (
         <>
           <Container>
-            {console.log(weatherCtx.status.isAlert)}
             {weatherCtx.status.isAlert ? <AlertBox /> : null}
             <LeftSide />
             <RightSide />
